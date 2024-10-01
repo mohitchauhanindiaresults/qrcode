@@ -4,7 +4,9 @@ import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemChrome, SystemUiMode, rootBundle;
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:scanner_app/Constant.dart';
 import 'package:scanner_app/JsonDataClass.dart';
+import 'package:scanner_app/Utils.dart';
 import 'package:scanner_app/certificate/CertificateScreen.dart';
 
 class MyHomePageeeeeeeeeeeee extends StatefulWidget {
@@ -38,7 +40,7 @@ class _MyHomePageeeeeeeeeeeeeState extends State<MyHomePageeeeeeeeeeeee> {
               for (final barcode in barcodes) {
                 final code = barcode.rawValue ?? "No Data found in QR";
                 try {
-                  _isScanning = false; // Disable scanning after first scan
+              //    _isScanning = false; // Disable scanning after first scan
 
                   // Convert the large Base64 string to Uint8List
                   String base64String = compressedNumberToBase64(code);
@@ -49,8 +51,8 @@ class _MyHomePageeeeeeeeeeeeeState extends State<MyHomePageeeeeeeeeeeee> {
                   print("track1");
                   printLongString(decompressedData);
                   //
-                   Map<String, dynamic> jsonMap = jsonDecode(decompressedData);
-                   JsonDataClass model = JsonDataClass.fromJson(jsonMap);
+                  Map<String, dynamic> jsonMap = jsonDecode(decompressedData);
+                  JsonDataClass model = JsonDataClass.fromJson(jsonMap);
                   //
                   // // Access data
                   // print("track2");
@@ -61,8 +63,19 @@ class _MyHomePageeeeeeeeeeeeeState extends State<MyHomePageeeeeeeeeeeee> {
                   // print("track3");
 
                   print("track2");
-                  String? c1Value = jsonMap['examResult']?['C10'];
+                  String? c1Value = jsonMap['examResult']?['C12'];
                   print(c1Value); // Output will be: P
+                  // Utils.saveStringToPrefs(Constant.C1, jsonMap['examResult']?['C1']);
+                  // Utils.saveStringToPrefs(Constant.C2, jsonMap['examResult']?['C2']);
+                  // Utils.saveStringToPrefs(Constant.C3, jsonMap['examResult']?['C3']);
+                  // Utils.saveStringToPrefs(Constant.C4, jsonMap['examResult']?['C4']);
+                  // Utils.saveStringToPrefs(Constant.C5, jsonMap['examResult']?['C5']);
+                  // Utils.saveStringToPrefs(Constant.C6, jsonMap['examResult']?['C6']);
+                  // Utils.saveStringToPrefs(Constant.C7, jsonMap['examResult']?['C7']);
+                  // Utils.saveStringToPrefs(Constant.C8, jsonMap['examResult']?['C8']);
+                  // Utils.saveStringToPrefs(Constant.C9, jsonMap['examResult']?['C9']);
+                  Utils.saveStringToPrefs(Constant.C10, jsonMap['examResult']?['C10']);
+                  Utils.saveStringToPrefs(Constant.C12, jsonMap['examResult']?['C12']);
 
                   // Navigate to CertificateWidget
                   Navigator.push(
