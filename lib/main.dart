@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:scanner_app/SpalshScreen.dart';
 import 'package:scanner_app/Testing.dart';
+import 'package:scanner_app/testing3.dart';
 
 //import 'firebase_options.dart';
 void main() async {
@@ -12,9 +12,6 @@ void main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-
-
-
 
   runApp(MyApp());
 }
@@ -27,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // routes: AppRoutes.routes,
       // theme: appTheme,
-      home: MyHomePageeeeeeeeeeeee(),
+      home: QRScanScreen(),
     );
   }
 }

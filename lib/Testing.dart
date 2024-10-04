@@ -26,78 +26,80 @@ class _MyHomePageeeeeeeeeeeeeState extends State<MyHomePageeeeeeeeeeeee> {
     // Enable full-screen mode
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          MobileScanner(
-            onDetect: (capture) {
-              if (!_isScanning) return; // Prevent scanning after first detection
+          // Wrap MobileScanner with a Container and set a background color for visibility
+          Container(
+            color: Colors.blue, // Temporary color to check visibility
+            height: 300.0, // Adjust this height based on your requirements
+            width: double.infinity,
+            child: MobileScanner(
 
-              final List<Barcode> barcodes = capture.barcodes;
-              for (final barcode in barcodes) {
-                final code = barcode.rawValue ?? "No Data found in QR";
-                try {
-              //    _isScanning = false; // Disable scanning after first scan
+              onDetect: (capture) {
+                if (!_isScanning) return;
 
-                  // Convert the large Base64 string to Uint8List
-                  String base64String = compressedNumberToBase64(code);
+                final List<Barcode> barcodes = capture.barcodes;
+                for (final barcode in barcodes) {
+                  final code = barcode.rawValue ?? "No Data found in QR";
+                  try {
+                    //    _isScanning = false; // Disable scanning after first scan
 
-                  printLongString(base64String);
+                    String base64String = compressedNumberToBase64(code);
+                    printLongString(base64String);
 
-                  String decompressedData = decompressGzipFromString(base64String);
-                  print("track1");
-                  printLongString(decompressedData);
-                  //
-                  Map<String, dynamic> jsonMap = jsonDecode(decompressedData);
-                  JsonDataClass model = JsonDataClass.fromJson(jsonMap);
-                  //
-                  // // Access data
-                  // print("track2");
-                  // print(model.examResult?.backgroundImageUrl);
-                  // print(model.examResult
-                  //     ?.values['C1']); // Accessing dynamically added "C" properties
-                  // print(model.base64ofStudentImage);
-                  // print("track3");
+                    String decompressedData = decompressGzipFromString(base64String);
+                    print("track1");
+                    printLongString(decompressedData);
 
-                  print("track2");
-                  String? c1Value = jsonMap['examResult']?['C12'];
-                  print(c1Value); // Output will be: P
-                  // Utils.saveStringToPrefs(Constant.C1, jsonMap['examResult']?['C1']);
-                  // Utils.saveStringToPrefs(Constant.C2, jsonMap['examResult']?['C2']);
-                  // Utils.saveStringToPrefs(Constant.C3, jsonMap['examResult']?['C3']);
-                  // Utils.saveStringToPrefs(Constant.C4, jsonMap['examResult']?['C4']);
-                  // Utils.saveStringToPrefs(Constant.C5, jsonMap['examResult']?['C5']);
-                  // Utils.saveStringToPrefs(Constant.C6, jsonMap['examResult']?['C6']);
-                  // Utils.saveStringToPrefs(Constant.C7, jsonMap['examResult']?['C7']);
-                  // Utils.saveStringToPrefs(Constant.C8, jsonMap['examResult']?['C8']);
-                  // Utils.saveStringToPrefs(Constant.C9, jsonMap['examResult']?['C9']);
-                  Utils.saveStringToPrefs(Constant.C10, jsonMap['examResult']?['C10']);
-                  Utils.saveStringToPrefs(Constant.C12, jsonMap['examResult']?['C12']);
+                    Map<String, dynamic> jsonMap = jsonDecode(decompressedData);
+                   // JsonDataClass model = JsonDataClass.fromJson(jsonMap);
 
-                  // Navigate to CertificateWidget
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CertificateWidget()),
-                  ).then((value) => _isScanning = true); // Enable scanning when returning
+                    print("track2");
+                    String? c1Value = jsonMap['examResult']?['C12'];
+                    print(c1Value); // Output will be: P
+                    // Utils.saveStringToPrefs(Constant.C1, jsonMap['examResult']?['C1']);
+                    // Utils.saveStringToPrefs(Constant.C2, jsonMap['examResult']?['C2']);
+                    // Utils.saveStringToPrefs(Constant.C3, jsonMap['examResult']?['C3']);
+                    // Utils.saveStringToPrefs(Constant.C4, jsonMap['examResult']?['C4']);
+                    // Utils.saveStringToPrefs(Constant.C5, jsonMap['examResult']?['C5']);
+                    // Utils.saveStringToPrefs(Constant.C6, jsonMap['examResult']?['C6']);
+                    // Utils.saveStringToPrefs(Constant.C7, jsonMap['examResult']?['C7']);
+                    // Utils.saveStringToPrefs(Constant.C8, jsonMap['examResult']?['C8']);
+                    // Utils.saveStringToPrefs(Constant.C9, jsonMap['examResult']?['C9']);
+                    Utils.saveStringToPrefs(Constant.C10, jsonMap['examResult']?['C10']);
+                    Utils.saveStringToPrefs(Constant.C12, jsonMap['examResult']?['C12']);
 
-                } catch (e) {
-                  print("Conversion to Uint8List failed: $e");
-                  _isScanning = true; // Re-enable scanning if an error occurs
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CertificateWidget()),
+                    ).then((value) => _isScanning = true);
+
+                  } catch (e) {
+                    print("Conversion to Uint8List failed: $e");
+                    _isScanning = true;
+                  }
                 }
-              }
-            },
+              },
+
+            ),
           ),
-          Center(
-            child: Text(
-              'Scan a QR Code',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+          // Ensure the text widget doesn't block the scanner view
+          Positioned(
+            bottom: 50.0, // Move text lower so it's not on top of the scanner
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'Scan a QR Code',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

@@ -1,0 +1,261 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_zxing/flutter_zxing.dart';
+import 'package:permission_handler/permission_handler.dart'; // Add this for handling permissions
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'QR Code Scanner',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const QRScannerPage(),
+    );
+  }
+}
+
+class QRScannerPage extends StatefulWidget {
+  const QRScannerPage({Key? key}) : super(key: key);
+
+  @override
+  State<QRScannerPage> createState() => _QRScannerPageState();
+}
+
+class _QRScannerPageState extends State<QRScannerPage> {
+  Code? result; // Holds the QR code result
+  bool permissionGranted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _requestCameraPermission(); // Request permission on start
+  }
+
+  Future<void> _requestCameraPermission() async {
+    final status = await Permission.camera.request();
+    setState(() {
+      permissionGranted = status.isGranted;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('QR Code Scanner'),
+      ),
+      body: permissionGranted
+          ? ReaderWidget(
+        onScan: (code) {
+          setState(() {
+            result = code;
+          });
+          if (code != null) {
+            _showMessage(context, 'Scan Successful: ${code.text}');
+          }
+        },
+        onScanFailure: (code) {
+          _showMessage(context, 'Scan failed: ${code?.error}');
+        },
+        resolution: ResolutionPreset.high, // Higher resolution for better QR detection
+        scanDelay: const Duration(milliseconds: 1000), // Keep scanning continuously
+      )
+          : Center(
+        child: const Text(
+          'Camera permission not granted. Please enable it in settings.',
+          style: TextStyle(color: Colors.red),
+        ),
+      ),
+    );
+  }
+
+  void _showMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+}
+----------------------------------------working HTML--------------------------------
+
+
+import 'package:flutter/material.dart';
+import 'package:html/parser.dart' as html_parser;
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Custom HTML Parser')),
+        body: HtmlToWidgets(
+          htmlData: "<h1>Hello, World!</h1><p>This is a paragraph.</p>",
+        ),
+      ),
+    );
+  }
+}
+
+class HtmlToWidgets extends StatelessWidget {
+  final String htmlData;
+
+  HtmlToWidgets({required this.htmlData});
+
+  @override
+  Widget build(BuildContext context) {
+    var document = html_parser.parse(htmlData);
+    List<Widget> widgets = [];
+
+    document.body?.children.forEach((element) {
+      if (element.localName == 'h1') {
+        widgets.add(Text(
+          element.text,
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        ));
+      } else if (element.localName == 'p') {
+        widgets.add(Text(element.text));
+      }
+    });
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: widgets,
+    );
+  }
+}
+-------------------------------HTML STABLE---------------------------
+
+  final String htmlData = '''
+    <!DOCTYPE html>
+    <html xmlns='http://www.w3.org/1999/xhtml'>
+    <head>
+        <title>Certificate</title>
+        <style>
+            body {
+                background-image: url('assets/osstet.jpg');
+                background-repeat: no-repeat;
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                position: relative;
+            }
+            .qr-code {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 200px;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <form id='form1' method='post'>
+            <table style='width:1000px; margin-top:50px;' cellpadding='8px' cellspacing='0'>
+                <tr>
+                    <td style='padding-left:150px; width:70%;'>Sample Text C1</td>
+                    <td style='padding-left:155px'>Sample Text C2</td>
+                </tr>
+                <tr>
+                    <td style='padding-left:195px;'>Sample Text C3</td>
+                    <td style='padding-left:155px'>Sample Text C4</td>
+                </tr>
+                <tr>
+                    <td style='padding-left:360px;padding-top:185px;'>Sample Text C5</td>
+                    <td style='padding-left:140px' rowspan='2'>
+                        <img src='data:image/png;base64,SampleBase64Image' height='120px' width='100px' style='margin-top:90px;' />
+                    </td>
+                </tr>
+                <tr>
+                    <td style='padding-left:320px;'>Sample Text C7</td>
+                </tr>
+                <tr>
+                    <td style='padding-left:180px;padding-top:35px;' colspan='2'>Sample Text C8</td>
+                </tr>
+                <tr>
+                    <td colspan='2'>
+                        <table width='100%' cellspacing='0' cellpadding='0'>
+                            <tr>
+                                <td style='padding-left:150px; width:45%;'>Sample Text C9</td>
+                                <td style='padding-left:10px;'>Sample Text C10 &nbsp; Sample Text C11</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='2'>
+                        <table width='100%' cellspacing='0' cellpadding='0'>
+                            <tr>
+                                <td style='padding-left:300px; width:60%;'></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style='padding-left:290px;'>Sample Text C12</td>
+                    <td>Sample Text C13</td>
+                </tr>
+                <tr>
+                    <td colspan='2'>
+                        <table width='100%'>
+                            <tr>
+                                <td style='padding-left:100px; width:25%; padding-top:80px;'>Sample Text C14</td>
+                                <td style='padding-top:80px; text-align:right;'>Sample Text C15</td>
+                                <td style='padding-left:100px;padding-top:11px; text-align:center;' rowspan='2'>
+                                    <img src='SampleSignatureUrl' height='60px' width='200px' />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div class='qr-code'>
+                <img src='data:image/png;base64,SampleBase64QRCode' width='200' height='200' />
+            </div>
+        </form>
+    </body>
+    </html>
+  ''';
+-----------------------------
+
+String generateAdmitCardHtml(String htmlTemplate, Map<String, dynamic> dataMap) {
+  // Loop through the dataMap and replace all placeholders in the HTML template
+  dataMap.forEach((key, value) {
+    // Replace placeholders like {{C1}}, {{C2}}, ... with the corresponding values in the dataMap
+    htmlTemplate = htmlTemplate.replaceAll('{{$key}}', value.toString());
+  });
+
+  return htmlTemplate;
+}
+
+-------------
+  String compressedNumberToBase64(String compressedNumber1) {
+    BigInt compressedNumber = BigInt.parse(compressedNumber1);
+    Uint8List byteArray = _bigIntToByteArray(compressedNumber);
+
+    if (byteArray.isNotEmpty && byteArray.last == 0) {
+      byteArray = byteArray.sublist(0, byteArray.length - 1);
+    }
+
+    return base64Encode(byteArray);
+  }
+
+  Uint8List _bigIntToByteArray(BigInt bigInt) {
+    var bytes = bigInt
+        .toUnsigned(8 * ((bigInt.bitLength + 7) >> 3))
+        .toRadixString(16)
+        .padLeft((bigInt.bitLength + 7) >> 3 * 2, '0');
+
+    List<int> byteList = [];
+    for (int i = 0; i < bytes.length; i += 2) {
+      byteList.add(int.parse(bytes.substring(i, i + 2), radix: 16));
+    }
+        return Uint8List.fromList(
+            byteList.reversed.toList()); // Reverse for little-endian
+      }
