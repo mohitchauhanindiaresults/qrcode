@@ -1,16 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:qr_mobile_vision/qr_camera.dart';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show SystemChrome, SystemUiMode, rootBundle;
-import 'package:scanner_app/Constant.dart';
-import 'package:scanner_app/JsonDataClass.dart';
-import 'package:scanner_app/Utils.dart';
-import 'package:scanner_app/certificate/CertificateScreen.dart';
+import 'package:image/image.dart' as img;
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qr_mobile_vision/qr_camera.dart';
+import 'package:scanner_app/FaceDetactionScreen.dart';
 import 'package:scanner_app/testing4.dart';
 
 class QRScanScreen extends StatefulWidget {
@@ -243,6 +239,7 @@ class _QRScanScreenState extends State<QRScanScreen> {
 </body>
 </html>
 """;
+
   @override
   void dispose() {
     controller?.dispose();
@@ -254,80 +251,145 @@ class _QRScanScreenState extends State<QRScanScreen> {
     super.initState();
   }
 
+  void _showDialog(
+      BuildContext context, Map<String, dynamic> jsonMap, String htmlData) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("ACTION"),
+          content: Text(
+              "Would you like to view the form or proceed with face detection?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                print("object");
+                Navigator.pop(context); // Close the dialog box
+                // Navigate to the "View Form" screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Testing_four(
+                        htmlData: generateAdmitCardHtml(htmlData, jsonMap)),
+                  ),
+                ).then((value) => _isScanning = true);
+              },
+              child: Text(
+                "View Form",
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog box
+
+
+              },
+              child: Text(
+                "Face Detection",
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 350),
-            ElevatedButton(onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => QrCamera(
+    return WillPopScope(
+      onWillPop: () async {
+        // Check if WebView can go back
 
-                    onError: (context, error) => Text(
-                      error.toString(),
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    qrCodeCallback: (code) {
-                      print("object1232");
-                   //   Fluttertoast.showToast(msg: code.toString());
-                      printLongString( code.toString());
-                     // print(code);
-                      try {
-                        //    _isScanning = false; // Disable scanning after first scan
-                        print("track0");
+        exit(0);
+      },
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 350),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QrCamera(
+                          qrCodeCallback: (code) {
+                            print("object1232");
+                            //   Fluttertoast.showToast(msg: code.toString());
+                            printLongString(code.toString());
+                            // print(code);
+                            if (_isScanning == true) {
+                              try {
+                                _isScanning =
+                                    false; // Disable scanning after first scan
+                                print("track0");
 
-                        String base64String = compressedNumberToBase64(code.toString());
-                        printLongString(base64String);
+                                String base64String = compressedNumberToBase64(code.toString());
+                                print("track000");
 
-                        String decompressedData = decompressGzipFromString(base64String);
-                        print("track1");
-                        printLongString(decompressedData);
+                                printLongString(base64String);
 
-                        Map<String, dynamic> jsonMap = jsonDecode(decompressedData);
-                        // JsonDataClass model = JsonDataClass.fromJson(jsonMap);
+                                String decompressedData = decompressGzipFromString(base64String);
+                                print("track1");
+                                printLongString(decompressedData);
 
-                        // print("track2");
-                        // String? c1Value = jsonMap['examResult']?['C12'];
-                        //
-                        // print(c1Value); // Output will be: P
-                        // // Utils.saveStringToPrefs(Constant.C1, jsonMap['examResult']?['C1']);
-                        // // Utils.saveStringToPrefs(Constant.C2, jsonMap['examResult']?['C2']);
-                        // // Utils.saveStringToPrefs(Constant.C3, jsonMap['examResult']?['C3']);
-                        // // Utils.saveStringToPrefs(Constant.C4, jsonMap['examResult']?['C4']);
-                        // // Utils.saveStringToPrefs(Constant.C5, jsonMap['examResult']?['C5']);
-                        // // Utils.saveStringToPrefs(Constant.C6, jsonMap['examResult']?['C6']);
-                        // // Utils.saveStringToPrefs(Constant.C7, jsonMap['examResult']?['C7']);
-                        // // Utils.saveStringToPrefs(Constant.C8, jsonMap['examResult']?['C8']);
-                        // // Utils.saveStringToPrefs(Constant.C9, jsonMap['examResult']?['C9']);
-                        // Utils.saveStringToPrefs(Constant.C10, jsonMap['examResult']?['C10']);
-                        // Utils.saveStringToPrefs(Constant.C12, jsonMap['examResult']?['C12']);
+                                Map<String, dynamic> jsonMap = jsonDecode(decompressedData);
+                                // JsonDataClass model = JsonDataClass.fromJson(jsonMap);
 
+                                // print("track2");
+                                // String? c1Value = jsonMap['examResult']?['C12'];
+                                //
+                                // print(c1Value); // Output will be: P
+                                // // Utils.saveStringToPrefs(Constant.C1, jsonMap['examResult']?['C1']);
+                                // // Utils.saveStringToPrefs(Constant.C2, jsonMap['examResult']?['C2']);
+                                // // Utils.saveStringToPrefs(Constant.C3, jsonMap['examResult']?['C3']);
+                                // // Utils.saveStringToPrefs(Constant.C4, jsonMap['examResult']?['C4']);
+                                // // Utils.saveStringToPrefs(Constant.C5, jsonMap['examResult']?['C5']);
+                                // // Utils.saveStringToPrefs(Constant.C6, jsonMap['examResult']?['C6']);
+                                // // Utils.saveStringToPrefs(Constant.C7, jsonMap['examResult']?['C7']);
+                                // // Utils.saveStringToPrefs(Constant.C8, jsonMap['examResult']?['C8']);
+                                // // Utils.saveStringToPrefs(Constant.C9, jsonMap['examResult']?['C9']);
+                                // Utils.saveStringToPrefs(Constant.C10, jsonMap['examResult']?['C10']);
+                                // Utils.saveStringToPrefs(Constant.C12, jsonMap['examResult']?['C12']);
 
-                        print("track2");
-                        printLongString(generateAdmitCardHtml(htmlData,jsonMap));
+                                print("track2");
+                                printLongString(generateAdmitCardHtml(htmlData, jsonMap));
 
-                          Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>Testing_four(htmlData: generateAdmitCardHtml(htmlData,jsonMap))),
-                        ).then((value) => _isScanning = true);
+                                _showDialog(context, jsonMap, htmlData);
 
-                      } catch (e) {
-                        print("Conversion to Uint8List failed: $e");
-                        _isScanning = true;
-                      }
-                 //    Navigator.pop(context, code);
-                    },
-                  ),
-                ),
-              );
+                                /// FOT THE APP OF SCANNER
+                                //  Navigator.push(context, MaterialPageRoute(builder: (context) =>Testing_four(htmlData: generateAdmitCardHtml(htmlData,jsonMap))),).then((value) => _isScanning = true);
 
-            }, child: Text(" Scan a QR"))
-          ],
+                                /// FOR THE APP OF FACE DETECTION
+
+                                //  print("track3");
+                                //  String? c1Value = jsonMap['Base64ofStudentImage'];
+                                //  print(c1Value);
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) =>FaceDetactionScreen( jsonMap['Base64ofStudentImage'])),).then((value) => _isScanning = true);
+                              } catch (e) {
+                                print("Conversion to Uint8List failed: $e");
+                                _isScanning = true;
+                              }
+                            }
+
+                            //    Navigator.pop(context, code);
+                          },
+                        ),
+                      ),
+                    );
+                  }, child: Text(" Scan a QR")),
+              // ElevatedButton(onPressed: (){
+              //   Navigator.push(context, MaterialPageRoute(builder: (context) =>FaceComparisonScreen()));
+              //
+              // },  child: Text(" Face recogonization testing")),
+              // ElevatedButton(onPressed: (){
+              //   Navigator.push(context, MaterialPageRoute(builder: (context) =>FaceComparisonScreen()));
+              //
+              // },  child: Text(" Face recogonization tesarflow"))
+            ],
+          ),
         ),
       ),
     );
@@ -376,14 +438,38 @@ class _QRScanScreenState extends State<QRScanScreen> {
     return htmlTemplate;
   }
 
-    static void printLongString(String text) {
+  String enhanceImageQualityAndReturnBase64(String base64Str) {
+    // Decode base64 to image bytes
+    Uint8List bytes = base64Decode(base64Str);
+
+    // Decode image from bytes
+    img.Image? decodedImage = img.decodeImage(bytes);
+
+    if (decodedImage != null) {
+      // Enhance image quality by resizing (double the size for better resolution)
+      img.Image resizedImage =
+          img.copyResize(decodedImage, width: decodedImage.width * 2);
+
+      // Optionally apply further enhancements (e.g., sharpening, contrast adjustments, etc.)
+      // img.Image enhancedImage = img.adjustColor(resizedImage, contrast: 1.2);
+
+      // Encode the enhanced image back to PNG format
+      Uint8List enhancedBytes = Uint8List.fromList(img.encodePng(resizedImage));
+
+      // Convert back to base64
+      return base64Encode(enhancedBytes);
+    }
+
+    // If decoding fails, return the original base64 string
+    return base64Str;
+  }
+
+  static void printLongString(String text) {
     final RegExp pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
     pattern
         .allMatches(text)
         .forEach((RegExpMatch match) => print(match.group(0)));
   }
-
-
 
   String compressedNumberToBase64(String compressedNumber1) {
     BigInt compressedNumber = BigInt.parse(compressedNumber1);
@@ -414,20 +500,18 @@ class _QRScanScreenState extends State<QRScanScreen> {
     return Uint8List.fromList(byteList.reversed.toList()); // Reverse for little-endian
   }
 
+    String decompressGzipFromString(String compressedData) {
+      try {
+        Uint8List compressedBytes = base64.decode(compressedData);
 
+        List<int> decompressedBytes = GZipDecoder().decodeBytes(compressedBytes);
 
-  String decompressGzipFromString(String compressedData) {
-    try {
-      Uint8List compressedBytes = base64.decode(compressedData);
-
-      List<int> decompressedBytes = GZipDecoder().decodeBytes(compressedBytes);
-
-      return utf8.decode(decompressedBytes);
-    } catch (e) {
-      print('Decompression failed: $e');
-      return '';
+        return utf8.decode(decompressedBytes);
+      } catch (e) {
+        print('Decompression failed: $e');
+        return '';
+      }
     }
-  }
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {

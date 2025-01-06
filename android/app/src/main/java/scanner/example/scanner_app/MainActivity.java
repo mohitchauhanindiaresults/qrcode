@@ -1,4 +1,4 @@
-package scanner.example.scanner_app;
+package scanner.scan.scanner_app;
 
 import io.flutter.embedding.android.FlutterActivity;
 

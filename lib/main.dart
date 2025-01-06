@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scanner_app/Testing.dart';
 import 'package:scanner_app/testing3.dart';
+import 'package:scanner_app/trash/TestingDontNet.dart';
 
 //import 'firebase_options.dart';
 void main() async {
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // routes: AppRoutes.routes,
       // theme: appTheme,
-      home: QRScanScreen(),
+     // home: QRScanScreen(),
+      home: TestingDontNet(),
     );
   }
 }
