@@ -35,8 +35,7 @@ class _TestingDontNetState extends State<TestingDontNet> {
     super.initState();
   }
 
-  void _showDialog(
-      BuildContext context, Map<String, dynamic> jsonMap, String htmlData) {
+  void _showDialog(BuildContext context, Map<String, dynamic> jsonMap, String htmlData) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -63,17 +62,17 @@ class _TestingDontNetState extends State<TestingDontNet> {
                 style: TextStyle(color: Colors.green),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Close the dialog box
-
-
-              },
-              child: Text(
-                "Face Detection",
-                style: TextStyle(color: Colors.green),
-              ),
-            ),
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.pop(context); // Close the dialog box
+            //
+            //
+            //   },
+            //   child: Text(
+            //     "Face Detection",
+            //     style: TextStyle(color: Colors.green),
+            //   ),
+            // ),
           ],
         );
       },
@@ -106,8 +105,7 @@ class _TestingDontNetState extends State<TestingDontNet> {
                             // print(code);
                             if (_isScanning == true) {
                               try {
-                                _isScanning =
-                                false; // Disable scanning after first scan
+                                _isScanning = false; // Disable scanning after first scan
                                 print("track11");
 
 

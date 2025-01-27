@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
-import 'package:scanner_app/FaceDetactionScreen.dart';
 import 'package:scanner_app/testing4.dart';
 
 class QRScanScreen extends StatefulWidget {
@@ -62,171 +62,228 @@ class _QRScanScreenState extends State<QRScanScreen> {
     </style>
 </head>
 <body>
-    <center style="width: 100%; margin-top: 15px;">
-        <a href="javascript:;" onclick="print()" class="themebtn" style="padding: 6px !important;">Print</a>
-        <a href="home" class="themebtn" style="padding: 6px !important;">Back To Home</a>
-    </center>
+
     
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div id="vresprint">
-                    <table class="table">
-                        <tr>
-                            <td colspan="3" align="center" style="border: none;">
-                                <small>*****CANDIDATE MUST CARRY THE PRINTED COPY OF THIS ADMIT CARD ON THE DAY OF EXAMINATION*****</small>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center" style="border: none; background: #1d6b9c; border: 1px solid #000;">
-                                <img src="assets/images/ssbHeader.jpg" style="height: 70px;">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center" style="border: 1px solid #000; padding: 5px 0 !important;">
-                                JAMMU & KASHMIR SERVICES SELECTION BOARD RECRUITMENT EXAMINATION.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center" style="border: 1px solid #000; padding: 5px 0 !important;">
-                                <strong style="font-size: 16px;">{{C1}}</strong></br>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                ROLL NUMBER
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;padding: 0 !important;vertical-align: middle;line-height: 0;">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td style="width: 100%; ">
-                                            <strong style="font-size: 22px;">{{C2}}</strong>    
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td style="border: 1px solid #000; width: 20%;" rowspan="7" align="center">
-                                <img src="{{Base64ofStudentImage}}" style="width: 120px; margin: 5px;">
-                            </td>
-                        </tr>
+                    <table width="100%" border="0" cellspacing="0" style="border-collapse: collapse;" cellpadding="0">
+                    <tr>
+                        <td class="table" colspan="2" style="text-align: center">
+                            <h1 class="logo-title" style="font-size: 20px;">Punjab State Teacher Eligibility Test
+                                <br />
+                                <span style="font-size: 15px">December-2024 
+                                <br />
+                                    ADMIT CARD (PROVISIONAL)
+                                <br />
+                                    EXAMINATION DATE - 01.12.2024 (Sunday)
+                                </span>
+                            </h1>
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                ADVERTISEMENT NO
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C4}}
-                            </td> 
-                        </tr>
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                ITEM NO (S)
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C5}}
-                            </td> 
-                        </tr>
+                           
+                        Admit Card should be Printed in Colour only. Black & White Printout will not be accepted
+                        </td>
+                     
+                        <td class="table" style="width: 200px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 24px;">{{C2}}
+                            <div style="text-align: center; vertical-align: middle; padding: 5px; padding-top: 10px; margin-top: 10px; font-weight: bold; font-size: 15px; border-top: solid 1px #000">
+                                Student Copy
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                APPLICATION NO (S)
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C6}}
-                            </td> 
-                        </tr>
+                    <tr class="table" style="background-color: lightgray">
+                        <td colspan="3" style="text-align: left; vertical-align: middle; padding: 5px; font-size: 15px;">Candidate's Details
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="border: solid 1px #000; padding: 0; border-top: none; border-bottom: none">
+                            <table border="0" style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000; border-left: none; border-top: none">
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                CANDIDATE'S NAME
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C7}}
-                            </td> 
-                        </tr>
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700;">Centre Code/Name</div>
+                                        <div style="padding: 5px;">{{C3}}-{{C4}} </div>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000; border-top: none">
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                FATHER'S NAME 
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C8}}
-                            </td> 
-                        </tr>
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700">Application Form No</div>
+                                        <div style="padding: 5px;">{{C5}}</div>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000; border-right: none; border-top: none">
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                MOTHER'S NAME
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C9}}
-                            </td> 
-                        </tr>
-                        
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                DATE OF BIRTH
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C10}}
-                            </td> 
-                            <td style="border: 1px solid #000; width: 20%;" rowspan="6" align="center">
-                                <small><b>Candidate to paste<br>his/her recent passport<br>size colour photograph<br>with name and date<br><br>(not older than 06 months from the date of examination)</b><br><br>(To be pasted before<br>reaching the Centre)</small>
-                            </td>
-                        </tr>
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700">Roll No.</div>
+                                        <div style="padding: 5px;">{{C6}}</div>
+                                    </td>
+                                    <td rowspan="3" style="border: solid 1px #000; padding: 5px; border-right: none; border-top: none">
+                                        <img src="{{Base64ofStudentImage}}" height="160px" width="120px" />
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                PWD (PERSONS WITH DISABILITY)
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C11}}
-                            </td>
-                        </tr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000; border-left: none">
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                CORRESPONDENCE ADDRESS 
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C12}}
-                            </td> 
-                        </tr>
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700">Name of Candidate</div>
+                                        <div style="padding: 5px;">{{C7}}</div>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000;">
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                POST NAME 
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C13}}
-                            </td> 
-                        </tr>
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700">Father's Name</div>
+                                        <div style="padding: 5px;">{{C8}}</div>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000; border-right: none;">
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                DATE OF EXAMINATION 
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C14}}
-                            </td> 
-                        </tr>
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700">Mother's Name</div>
+                                        <div style="padding: 5px;">{{C9}}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000; border-left: none">
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700;">Category</div>
+                                        <div style="padding: 5px; font-size: 13px !important">
+                                            {{C10}}
+                                        </div>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000; border-left: none">
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700;">Differently Abled</div>
+                                        <div style="padding: 5px;">
+                                            {{C11}}
+                                        </div>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 15px; font-weight: 400; border: solid 1px #000; border-right: none;">
+                                     
+                                        <div style="padding: 5px; border-bottom: solid 1px #000; font-weight: 700; border-left: none">
+                                            Subject
 
-                        <tr>
-                            <td style="border: 1px solid #000; width: 30%">
-                                EXAMINATION CITY NAME
-                            </td>
-                            <td style="border: 1px solid #000; width: 50%;">
-                                {{C15}}
-                            </td> 
-                        </tr>
+                                        </div>
+                                        <div style="padding: 5px;">{{C13}}</div>
+                                      
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
 
-                   
-                        
-                        <!-- Additional rows can be added here as needed, following the pattern {{C20}}, {{C21}}, etc. -->
-                        
-                    </table>
+                                    <td colspan="4" style="text-align: left; vertical-align: middle; padding: 5px; font-size: 15px; font-weight: 700; border: solid 1px #000; border-left: none;">Exam Centre:- <span style="padding: 5px; font-weight: 400">{{C12}}</span>
+
+                                    </td>
+
+                                   
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" style="border: solid 1px #000; padding: 0; border-top: none; border-bottom: none">
+                            <table border="0" style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="background: lightgray; text-align: center; vertical-align: middle; padding: 5px; font-size: 15px; border: solid 1px #000; border-right: none; border-top: none; border-left: none;">Date of Examination
+                                    </td>
+                                    <td style="background: lightgray; text-align: center; vertical-align: middle; padding: 5px; font-size: 15px; border: solid 1px #000; border-right: none; border-top: none;">Reporting Time
+                                    </td>
+                                    <td style="background: lightgray; text-align: center; vertical-align: middle; padding: 5px; font-size: 13px; border: solid 1px #000; border-right: none; border-top: none;">Time of Examination
+                                    </td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle; padding: 5px; font-size: 15px; font-weight: 400; border: solid 1px #000; border-right: none; border-left: none">{{C14}}</td>
+                                    <td style="text-align: center; vertical-align: middle; padding: 5px; font-size: 15px; font-weight: 400; border: solid 1px #000; border-right: none">{{C15}}
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle; padding: 5px; font-size: 13px; font-weight: 400; border: solid 1px #000; border-right: none">{{C16}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: bottom; border: solid 1px #000; padding: 5px; border-top: none; border-right: none; border-left: none">Roll No. Authentication Box </td>
+                                    <td style="text-align: center; vertical-align: bottom; border: solid 1px #000; padding: 5px; border-top: none; border-right: none">Signature of Invigilator </td>
+                                    <td style="text-align: center; border: solid 1px #000; padding: 5px; border-top: none; border-right: none">
+                                        <img src="images/sanjeevsharma.jpg" style="width: 100px" />
+                                        <br />
+                                        ( Secretary )
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" style="border: solid 1px #000; padding: 5px; border-top: none;">
+                            <h5 style="text-align: center; font-weight: 700; text-decoration: underline; font-size: 18px; margin: 0">INSTRUCTIONS FOR CANDIDATES(Please Read Carefully)
+                            </h5>
+                            <ol style="padding-left: 18px">
+                                <li>This Admit Card is subject to condition that if ineligibility is detected at any stage , the candidature will be cancelled.</li>
+                                <li>Candidate shall be provided pen to attempt exam.</li>
+                                <li>All candidates will be under surveillance, inside the Examination Center premises hence advised not to indulge in any unlawful activity which may invite disqualification and legal action.
+                                </li>
+                                <li>Entry to Examination Hall is subject to production of Admit Card and Photo ID proof to prove your identity.
+                                </li>
+                                <li>Pen, Cell Phones, Watches, Pagers, Calculators or any Electronic Devices are strictly prohibited. Violation may lead to expulsion from
+the examination including cancellation of Candidature.
+                                </li>
+                                <li>Do not carry any articles, except Admit Card & Photo ID in the Examination Hall.
+                                </li>
+                                <li>Do not attempt to give or obtain assistance of any kind in the Examination Hall.
+                                </li>
+                                <li>Any attempt to remove pages from Question Booklet is strictly prohibited and shall lead to cancellation of Candidature.
+                                </li>
+                                <li>Copying or noting down question is strictly prohibited.</li>
+                                <li>Improper conduct will entail expulsion from the examination.
+                                </li>
+                                <li>PSTET-24 reserves all rights to verify identity and genuineness of each candidate by taking Facial recognition / photograph of the candidate or by
+any other means.
+                                </li>
+                                <li>Preserve this Admit Card for record.
+
+                                </li>
+                                <li>Failure to comply with these instructions will entail expulsion/cancellation of candidature or appropriate legal action.
+
+                                </li>
+                                <li>No entry is allowed in Examination Hall after half an hour on start of exam.
+
+                                </li>
+
+
+                                <li>Candidate cannot leave Examination Hall without permission of Invigilator.
+
+
+                                </li>
+
+                                <li>Do not leave the hall without handing over OMR Answer Sheet to the invigilator
+
+                                </li>
+
+                                <li>Candidate must sign the attendance Sheet. Missing signature on attendance sheet shall be considered absent of the candidate.
+
+
+                                </li>
+
+                                <li>In case of any ambiguity in any question, the query can be submitted to expert commitee through online grievance on website www.pstet.pseb.ac.in.
+The decision of the expert committee shall be final. No query shall be entertained their after.
+
+
+                                </li>
+
+                                <li>The candidate is advised to visit website www.pstet.pseb.ac.in/www.pseb.ac.in, regularly. No separate communication shall be made to any candidate.
+
+                                </li>
+
+                                <li>Candidate requiring scriber (writer) shall submit separate admit card/proforma for scriber to the centre superintendent.
+
+
+                                </li>
+
+                                <li>Paste recent passport size colored photograph attested by Gazetted Officer on office copy.
+
+                                </li>
+
+                                <li>The Candidate having 40% or more disability should be allowed 20 minutes extra time per hour as compensatory time.
+                                </li>
+
+                            </ol>
+                        </td>
+                    </tr>
+                </table>
                 </div>
             </div>
         </div>
@@ -240,11 +297,19 @@ class _QRScanScreenState extends State<QRScanScreen> {
 </html>
 """;
 
+
+
+
+
+
+
+
   @override
   void dispose() {
     controller?.dispose();
     super.dispose();
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -258,8 +323,7 @@ class _QRScanScreenState extends State<QRScanScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("ACTION"),
-          content: Text(
-              "Would you like to view the form or proceed with face detection?"),
+          content: Text("Would you like to view the form ?"),
           actions: [
             TextButton(
               onPressed: () {
@@ -279,17 +343,17 @@ class _QRScanScreenState extends State<QRScanScreen> {
                 style: TextStyle(color: Colors.green),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Close the dialog box
-
-
-              },
-              child: Text(
-                "Face Detection",
-                style: TextStyle(color: Colors.green),
-              ),
-            ),
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.pop(context); // Close the dialog box
+            //
+            //
+            //   },
+            //   child: Text(
+            //     "Face Detection",
+            //     style: TextStyle(color: Colors.green),
+            //   ),
+            // ),
           ],
         );
       },
@@ -326,16 +390,19 @@ class _QRScanScreenState extends State<QRScanScreen> {
                                     false; // Disable scanning after first scan
                                 print("track0");
 
-                                String base64String = compressedNumberToBase64(code.toString());
+                                String base64String =
+                                    compressedNumberToBase64(code.toString());
                                 print("track000");
 
                                 printLongString(base64String);
 
-                                String decompressedData = decompressGzipFromString(base64String);
+                                String decompressedData =
+                                    decompressGzipFromString(base64String);
                                 print("track1");
                                 printLongString(decompressedData);
 
-                                Map<String, dynamic> jsonMap = jsonDecode(decompressedData);
+                                Map<String, dynamic> jsonMap =
+                                    jsonDecode(decompressedData);
                                 // JsonDataClass model = JsonDataClass.fromJson(jsonMap);
 
                                 // print("track2");
@@ -379,7 +446,8 @@ class _QRScanScreenState extends State<QRScanScreen> {
                         ),
                       ),
                     );
-                  }, child: Text(" Scan a QR")),
+                  },
+                  child: Text(" Scan a QR")),
               // ElevatedButton(onPressed: (){
               //   Navigator.push(context, MaterialPageRoute(builder: (context) =>FaceComparisonScreen()));
               //
@@ -394,6 +462,7 @@ class _QRScanScreenState extends State<QRScanScreen> {
       ),
     );
   }
+
   // String generateAdmitCardHtml(String htmlTemplate, Map<String, dynamic> dataMap) {
   //   // Loop through the dataMap and replace all placeholders in the HTML template
   //
@@ -409,10 +478,12 @@ class _QRScanScreenState extends State<QRScanScreen> {
   //   return htmlTemplate;
   // }
 
-  String generateAdmitCardHtml(String htmlTemplate, Map<String, dynamic> dataMap) {
-    printLongString("Befpre"+htmlTemplate);
+  String generateAdmitCardHtml(
+      String htmlTemplate, Map<String, dynamic> dataMap) {
+    printLongString("Befpre" + htmlTemplate);
     // Extract the nested 'cleanedModel' map if it exists in the dataMap
-    if (dataMap.containsKey('cleanedModel') && dataMap['cleanedModel'] is Map<String, dynamic>) {
+    if (dataMap.containsKey('cleanedModel') &&
+        dataMap['cleanedModel'] is Map<String, dynamic>) {
       Map<String, dynamic> cleanedModel = dataMap['cleanedModel'];
 
       // Loop through the cleanedModel map and replace placeholders in the HTML template
@@ -420,20 +491,21 @@ class _QRScanScreenState extends State<QRScanScreen> {
         htmlTemplate = htmlTemplate.replaceAll('{{$key}}', value.toString());
       });
     }
-    printLongString("Befpre1"+htmlTemplate);
+    printLongString("Befpre1" + htmlTemplate);
 
     // Replace other placeholders outside of 'cleanedModel' if needed
     dataMap.forEach((key, value) {
       if (key != 'cleanedModel') {
         // Special handling for the Base64ofStudentImage key to embed in an <img> tag
         if (key == 'Base64ofStudentImage') {
-          htmlTemplate = htmlTemplate.replaceAll('{{Base64ofStudentImage}}', 'data:image/png;base64,$value');
+          htmlTemplate = htmlTemplate.replaceAll(
+              '{{Base64ofStudentImage}}', 'data:image/png;base64,$value');
         } else {
           htmlTemplate = htmlTemplate.replaceAll('{{$key}}', value.toString());
         }
       }
     });
-    printLongString("Befpre2"+htmlTemplate);
+    printLongString("Befpre2" + htmlTemplate);
 
     return htmlTemplate;
   }
@@ -497,21 +569,23 @@ class _QRScanScreenState extends State<QRScanScreen> {
       byteList.add(int.parse(hexString.substring(i, i + 2), radix: 16));
     }
 
-    return Uint8List.fromList(byteList.reversed.toList()); // Reverse for little-endian
+    return Uint8List.fromList(
+        byteList.reversed.toList()); // Reverse for little-endian
   }
 
-    String decompressGzipFromString(String compressedData) {
-      try {
-        Uint8List compressedBytes = base64.decode(compressedData);
+  String decompressGzipFromString(String compressedData) {
+    try {
+      Uint8List compressedBytes = base64.decode(compressedData);
 
-        List<int> decompressedBytes = GZipDecoder().decodeBytes(compressedBytes);
+      List<int> decompressedBytes = GZipDecoder().decodeBytes(compressedBytes);
 
-        return utf8.decode(decompressedBytes);
-      } catch (e) {
-        print('Decompression failed: $e');
-        return '';
-      }
+      return utf8.decode(decompressedBytes);
+    } catch (e) {
+      print('Decompression failed: $e');
+      return '';
     }
+  }
+
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {

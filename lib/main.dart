@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       // routes: AppRoutes.routes,
       // theme: appTheme,
      // home: QRScanScreen(),
-      home: TestingDontNet(),
+      home: QRScanScreen(),
     );
   }
 }

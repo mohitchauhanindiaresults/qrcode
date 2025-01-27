@@ -62,7 +62,14 @@ class FullScreenWebView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Full Screen WebView'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
+
       body: WebView(
         initialUrl: Uri.dataFromString(
           htmlData,

@@ -259,3 +259,228 @@ String generateAdmitCardHtml(String htmlTemplate, Map<String, dynamic> dataMap) 
         return Uint8List.fromList(
             byteList.reversed.toList()); // Reverse for little-endian
       }
+
+
+
+
+
+---------------------------------LATEST HTML------------------------------------------
+  String htmlData = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Admit Card</title>
+    <style>
+        .themebtn {
+            background: #1d6b9c;
+            border: 1px solid #1d6b9c;
+            color: #fff !important;
+            padding: 4px 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2;
+            margin-top: 10px;
+        }
+        @media print {
+            .themebtn {
+                display: none;
+            }
+        }
+        td {
+            padding: 2px !important;
+        }
+        table {
+            font-size: 12px;
+        }
+        .ollisting {
+            padding-left: 20px;
+        }
+        .ollisting li {
+            margin-bottom: 1px;
+            text-align: left;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <center style="width: 100%; margin-top: 15px;">
+        <a href="javascript:;" onclick="print()" class="themebtn" style="padding: 6px !important;">Print</a>
+        <a href="home" class="themebtn" style="padding: 6px !important;">Back To Home</a>
+    </center>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="vresprint">
+                    <table class="table">
+                        <tr>
+                            <td colspan="3" align="center" style="border: none;">
+                                <small>*****CANDIDATE MUST CARRY THE PRINTED COPY OF THIS ADMIT CARD ON THE DAY OF EXAMINATION*****</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="center" style="border: none; background: #1d6b9c; border: 1px solid #000;">
+                                <img src="assets/images/ssbHeader.jpg" style="height: 70px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="center" style="border: 1px solid #000; padding: 5px 0 !important;">
+                                JAMMU & KASHMIR SERVICES SELECTION BOARD RECRUITMENT EXAMINATION.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="center" style="border: 1px solid #000; padding: 5px 0 !important;">
+                                <strong style="font-size: 16px;">{{C1}}</strong></br>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                ROLL NUMBER
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;padding: 0 !important;vertical-align: middle;line-height: 0;">
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="width: 100%; ">
+                                            <strong style="font-size: 22px;">{{C2}}</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="border: 1px solid #000; width: 20%;" rowspan="7" align="center">
+                                <img src="{{Base64ofStudentImage}}" style="width: 120px; margin: 5px;">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                ADVERTISEMENT NO
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C4}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                ITEM NO (S)
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C5}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                APPLICATION NO (S)
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C6}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                CANDIDATE'S NAME
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C7}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                FATHER'S NAME
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C8}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                MOTHER'S NAME
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C9}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                DATE OF BIRTH
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C10}}
+                            </td>
+                            <td style="border: 1px solid #000; width: 20%;" rowspan="6" align="center">
+                                <small><b>Candidate to paste<br>his/her recent passport<br>size colour photograph<br>with name and date<br><br>(not older than 06 months from the date of examination)</b><br><br>(To be pasted before<br>reaching the Centre)</small>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                PWD (PERSONS WITH DISABILITY)
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C11}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                CORRESPONDENCE ADDRESS
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C12}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                POST NAME
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C13}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                DATE OF EXAMINATION
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C14}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: 1px solid #000; width: 30%">
+                                EXAMINATION CITY NAME
+                            </td>
+                            <td style="border: 1px solid #000; width: 50%;">
+                                {{C15}}
+                            </td>
+                        </tr>
+
+
+
+                        <!-- Additional rows can be added here as needed, following the pattern {{C20}}, {{C21}}, etc. -->
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <center style="width: 100%; margin-top: 15px;">
+        <a href="javascript:;" onclick="print()" class="themebtn" style="padding: 6px !important;">Print</a>
+        <a href="home" class="themebtn" style="padding: 6px !important;">Back To Home</a>
+    </center>
+</body>
+</html>
+""";
