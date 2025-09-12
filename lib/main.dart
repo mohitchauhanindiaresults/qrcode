@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:scanner_app/FaceComparisonScreen.dart';
 import 'package:scanner_app/Testing.dart';
 import 'package:scanner_app/testing3.dart';
 import 'package:scanner_app/trash/TestingDontNet.dart';
@@ -25,8 +26,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // routes: AppRoutes.routes,
       // theme: appTheme,
-     // home: QRScanScreen(),
-      home: QRScanScreen(),
+//      home: QRScanScreen(),
+      home: FaceComparisonScreen(),
     );
   }
 }

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image/image.dart' as img;
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
@@ -117,7 +116,7 @@ class _TestingDontNetState extends State<TestingDontNet> {
                                  String? c1Value = jsonMap['ImageUrl'];
                                 print("track0");
                                 printLongString( c1Value!);
-                                Fluttertoast.showToast(msg: "success");
+                                // Fluttertoast.showToast(msg: "success");
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

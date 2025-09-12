@@ -3,7 +3,6 @@ import 'dart:convert';  // for base64 decoding/encoding
 import 'dart:io';
 import 'dart:typed_data';  // for Uint8List
 import 'package:image/image.dart' as img;  // image packageimport 'dart:io';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -106,11 +105,11 @@ class _FaceDetactionScreenState extends State<FaceDetactionScreen> {
       } else {
         // Handle server errors and display error message from response
         String errorMessage = responseData['error'] ?? 'Error: ${response.statusCode}';
-        Fluttertoast.showToast(msg: errorMessage);
+        // Fluttertoast.showToast(msg: errorMessage);
       }
     } catch (e) {
       // Handle general exceptions and show error message
-      Fluttertoast.showToast(msg: erromesg);
+      // Fluttertoast.showToast(msg: erromesg);
     }
 
   }
